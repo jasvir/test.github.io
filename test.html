@@ -1,1 +1,23 @@
 <script src="test.js"></script>
+
+<script>
+function service_worker_register() {
+  console.log('attempting to register');
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('test.js', {scope: './'}).then(function(registration) {
+      console.log('success');
+    }).catch(function(error) {
+      debugger;
+      console.log(error);
+    });
+  } else {
+    // The current browser doesn't support service workers.
+    var aElement = document.createElement('a');
+    aElement.href = 'http://www.chromium.org/blink/serviceworker/service-worker-faq';
+    aElement.textContent = 'unavailable';
+    document.querySelector('#status').appendChild(aElement);
+  }
+}
+  service_worker_register();
+</script>
+
